@@ -1,0 +1,50 @@
+﻿
+@model EadWebProject.Models.Profile
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="~/Content/style1.css" rel="stylesheet" type="text/css" media="all" />
+
+
+    <style>
+        body{
+            background-image:url(@Url.Content("~/MyImages/bg.png"));
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Signup Page</h1>
+    </div>
+
+    <div class="mail-form shadow">
+        <form action="/Account/Signup" method="post">
+            <input name="Email" typeof="email" type="text" class="credentials" placeholder="First Name" required="" />            
+            <input  name="Password" type="password" class="pass" placeholder="Password" required="" />            
+            <br/>
+            <span>Tutor:</span><input value="Tutor" checked name="Role" type="radio"/>
+            <span>Parent:</span><input value="Parernt" name="Role" type="radio"/>
+            <br />
+            <br />
+            <br />
+            <input type="submit" value="Signup">
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>Design by  <a href="https://w3layouts.com/" target="_blank">  w3layouts </a></p>
+    </div>
+
+</body>
+</html>

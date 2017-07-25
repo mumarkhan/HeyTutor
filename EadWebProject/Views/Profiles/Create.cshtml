@@ -1,0 +1,71 @@
+﻿@model EadWebProject.Models.Profile
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="header">
+    <h1>Create Your Profile</h1>
+</div>
+
+<div class="mail-form shadow">
+    <form action="/Profiles/Create" method="post">
+        <input type="text" class="credentials" value="@Session["login"]" name="UserId" readonly />
+        <input type="text" class="credentials" placeholder="First Name" name="FirstName" required="" />
+        <input type="text" class="credentials" placeholder="Last name" name="LastName" required="" />
+        <input type="text" class="credentials" placeholder="Education" name="Education" required="" />
+        <input type="text" class="credentials" placeholder="Experience" name="Experiance" required="" />
+        <input type="text" class="credentials" placeholder="Address" name="Address" required="" />
+        <input type="text" class="credentials" placeholder="Contact Number" name="ContactNumber" required="" />
+        <input type="password" class="pass" placeholder="Current Password" name="ProfilePic" required="" />
+        <br />
+        <input type="submit" value="submit">
+    </form>
+
+    @*<label for="files" class="btn">Select Image</label>*@
+    <input type="file" id="myfile" class="btn" accept=".jpg,.png" /> <br />
+    <input type="submit" value="Save" id="btnUpload" />
+
+</div>
+
+<div class="footer">
+    <p>Design by  <a href="https://w3layouts.com/" target="_blank">  w3layouts </a></p>
+</div>
+@section imagescripts {
+    <script>
+
+
+        $(document).ready(function () {
+            $("#btnUpload").click(function () {
+
+                var data = new FormData();
+                var files = $("#myfile").get(0).files;
+                if (files.length > 0) {
+                    console.log(files[0]);
+                    data.append("myfile", files[0]);
+                }
+                var settings = {
+                    type: "POST",
+                    url: "/Profiles/SaveFile2",
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (r) {
+                        console.log("file uploaded");
+                        alert("successfully uploaded");
+                    },
+                    error: function () {
+                        alert('Not Uploaded');
+                    }
+
+                };
+
+                $.ajax(settings);
+                return false;
+
+            });
+
+        });
+    </script>
+
+}

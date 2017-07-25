@@ -1,0 +1,91 @@
+﻿@model EadWebProject.Models.ProfileWithLikes
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="~/Content/style.css" rel='stylesheet' type='text/css' />
+    <link href="//fonts.googleapis.com/css?family=Alegreya+Sans" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <script src="~/Scripts/jquery-1.11.1.min.js"></script>
+    <script src="js/Chart.js"></script>
+
+    <style>
+        body {
+            background: url(@Url.Content("~/MyImages/bodybg.jpg")) no-repeat 0px 0px;
+        }
+        .profile-top-w3l{
+	        background:url(@Url.Content("~/MyImages/bg.jpg")) no-repeat 0px 0px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Profile Details</h1>
+    <div class="main-agile">
+        <div class="profile-agileits">
+            <div class="profile-top-w3l">
+            </div>
+            <div class="profile-bottom-w3">
+                <div class="profile-bottom-w3-part1">
+                    <div class="profile-bottom-w3-part1-left">
+                        <div class="image">
+                            <img src="@Url.Content("~/UploadedImages/"+Model.MyProfile.ProfilePic)" alt=" " />
+                        </div>
+                    </div>
+                    <div class="profile-bottom-w3-part1-right">
+                        <h2>@Model.MyProfile.FirstName<span> </span>@Model.MyProfile.LastName</h2>
+                        <h3>Home Tutor</h3>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="profile-bottom-w3-part2">
+                    <div class="profile-bottom-w3-part2-left">
+                        <h4>@Model.NoOfLikes</h4>
+                        <h5>Likes<h5>
+                    </div>
+                    <div class="profile-bottom-w3-part2-middle">
+                        <h4>@Model.NoOfDislikes</h4>
+                        <h5>Dislikes<h5>
+                    </div>
+                    <div class="profile-bottom-w3-part2-right">
+                        @if (Model.NoOfLikes - Model.NoOfDislikes > 0)
+                        {
+                            <h4>Good</h4>
+                        }
+                        else
+                        {
+                            <h4>Bad</h4>
+                        }
+                        <h5>Overall<h5>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container well" style="color:black">
+            <h2>Education:</h2>
+            <p>@Model.MyProfile.Education</p><br>
+            <h2>Experience:</h2>
+            <p>@Model.MyProfile.Experiance</p><br>
+            <h2>Address:</h2>
+            <p>@Model.MyProfile.Address</p><br>
+            <h2>Contact Number:</h2>
+            <p>@Model.MyProfile.ContactNumber</p><br>
+        </div>
+    </div>
+    <div class="footer-w3l">
+        <p class="agileinfo"> &copy; 2017 Easy profile Widget. All Rights Reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+    </div>
+</body>
+</html>
