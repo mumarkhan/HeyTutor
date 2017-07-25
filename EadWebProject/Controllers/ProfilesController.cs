@@ -73,6 +73,8 @@ namespace EadWebProject.Controllers
         // GET: Profiles/Create
         public ActionResult Create()
         {
+            if (Session["login"] == null)
+                return Redirect("/Account/Login");
             ViewBag.UserID = new SelectList(db.Users, "UserID", "PasswordHash");
             return View();
         }
@@ -92,34 +94,44 @@ namespace EadWebProject.Controllers
                 return Redirect("/Account/Login");
 
 
-            var uniqueName = "";
-            if (Request.Files["Image"] != null)
-            {
-                var file = Request.Files["Image"];
-                if (file.FileName != "")
-                {
-                    var ext = System.IO.Path.GetExtension(file.FileName);
+            //var uniqueName = "";
+            //if (Request.Files["Image"] != null)
+            //{
+            //    var file = Request.Files["Image"];
+            //    if (file.FileName != "")
+            //    {
+            //        var ext = System.IO.Path.GetExtension(file.FileName);
 
-                    profile.ProfilePic = uniqueName = Guid.NewGuid().ToString() + "__4__" + file.FileName;
+            //        profile.ProfilePic = uniqueName = Guid.NewGuid().ToString() + "__4__" + file.FileName;
 
-                    var rootPath = Server.MapPath("~/UploadedFiles");
+            //        var rootPath = Server.MapPath("~/UploadedFiles");
 
-                    var fileSavePath = System.IO.Path.Combine(rootPath, uniqueName);
+            //        var fileSavePath = System.IO.Path.Combine(rootPath, uniqueName);
 
-                    file.SaveAs(fileSavePath);
+            //        file.SaveAs(fileSavePath);
 
-                }
-            }
+            //    }
+            //}
 
 
 
             if (ModelState.IsValid)
             {
-                db.Profiles.Add(profile);
-                db.SaveChanges();
+                Profile p2 = db.Profiles.Where(x => x.UserID.ToUpper().Equals(profile.UserID.ToUpper())).First();                
+                if (p2 == null)
+                {
+                    db.Profiles.Add(profile);
+                    db.SaveChanges();
+                    
+                }else
+                {
+                    profile.ProfilePic = p2.ProfilePic;
+                    db.Entry(p2).CurrentValues.SetValues(profile);
+                    db.SaveChanges();
+                }
                 return RedirectToAction("Index");
             }
-
+            
             ViewBag.UserID = new SelectList(db.Users, "UserID", "PasswordHash", profile.UserID);
             return View(profile);
         }

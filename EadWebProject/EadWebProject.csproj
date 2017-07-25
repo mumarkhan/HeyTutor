@@ -225,6 +225,10 @@
     <Content Include="MyImages\bg.jpg" />
     <Content Include="MyImages\bg.png" />
     <Content Include="MyImages\bodybg.jpg" />
+    <Content Include="MyImages\books.jpg" />
+    <Content Include="MyImages\pen.jpg" />
+    <Content Include="MyImages\reading.jpg" />
+    <Content Include="MyImages\writing.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
